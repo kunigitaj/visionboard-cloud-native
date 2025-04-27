@@ -1,8 +1,11 @@
 # VisionBoard – Cloud-Native Goal Tracking API
 
+![Node.js](https://img.shields.io/badge/Node.js-18.x-green) 
+![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey)
+
 VisionBoard is a lightweight, cloud-native goal tracking API built with Node.js, Docker, Kubernetes, and Google Cloud Platform (GCP).
 
-It is part of the full VisionBoard system — a real-world example of modern cloud-native application design, featuring clean architecture and scalable deployments.
+It is part of the full VisionBoard system — a real-world example of modern cloud-native application design, featuring clean architecture, scalable deployments, and AI-enhanced features.
 
 ---
 
@@ -15,13 +18,19 @@ It is part of the full VisionBoard system — a real-world example of modern clo
 - GitHub Actions CI/CD pipeline
 - Kubernetes Service with LoadBalancer
 
-See [architecture/architecture_explained.md](./architecture/architecture_explained.md) for more details.
+> See [architecture/architecture_explained.md](./architecture/architecture_explained.md) for more detailed architecture insights.
 
 ---
 
-## Quick Start
+## Project Demo
 
-### 1. Clone this repository
+🚀 Coming Soon — Screenshots and walkthroughs!
+
+---
+
+## Quick Start Guide
+
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/your-username/visionboard-cloud-native.git
@@ -31,58 +40,56 @@ cd visionboard-cloud-native/backend
 ### 2. Run Locally Without Docker
 
 ```bash
-cd backend
 npm install
 npm run dev
 ```
+> The API will be available at [http://localhost:8080](http://localhost:8080).
 
-The API will be available at [http://localhost:8080](http://localhost:8080).
+You can now test the endpoints using **curl**, **Postman**, or any API client.
 
-You can now directly test the endpoints locally using curl or Postman.
-
-### 3. Build the Docker image
+### 3. Build and Run via Docker
 
 ```bash
 docker build -t visionboard-api .
-```
-
-### 4. Run the Docker container locally
-
-```bash
 docker run -p 8080:8080 visionboard-api
 ```
-
-The API will be available at [http://localhost:8080](http://localhost:8080).
+> Access the API at [http://localhost:8080](http://localhost:8080).
 
 ---
 
-## API Endpoints
+## API Endpoints Overview
 
 | Endpoint | Method | Description |
 |:---|:---|:---|
-| `/healthz` | GET | Health check |
-| `/goals` | GET | Fetch all goals |
-| `/goals` | POST | Create a new goal |
-| `/goals/:id` | PUT | Update a goal’s status |
-| `/goals/:id` | DELETE | Delete a goal |
+| `/healthz` | GET | Check server health status |
+| `/goals` | GET | Retrieve all created goals |
+| `/goals` | POST | Create a new goal (requires `title`, optional `description`) |
+| `/goals/:id` | PATCH | Update a goal’s status (e.g., mark as Completed) |
+| `/goals/:id` | DELETE | Permanently delete a goal |
 
 ---
 
 ## Testing the API Locally
 
 ```bash
-# Get all goals
+# Fetch all goals
 curl http://localhost:8080/goals
 
 # Create a new goal
-curl -X POST http://localhost:8080/goals -H "Content-Type: application/json" -d '{"title": "Launch App", "description": "Complete MVP version"}'
+curl -X POST http://localhost:8080/goals \
+  -H "Content-Type: application/json" \
+  -d '{"title": "Launch App", "description": "Complete MVP version"}'
 
 # Update a goal's status
-curl -X PUT http://localhost:8080/goals/{goal_id} -H "Content-Type: application/json" -d '{"status": "Completed"}'
+curl -X PATCH http://localhost:8080/goals/{goal_id} \
+  -H "Content-Type: application/json" \
+  -d '{"status": "Completed"}'
 
 # Delete a goal
 curl -X DELETE http://localhost:8080/goals/{goal_id}
 ```
+
+> Replace `{goal_id}` with the actual ID of the goal you want to update or delete.
 
 ---
 
@@ -92,6 +99,6 @@ The content and source code in this project are the intellectual property of Kun
 
 This work is licensed under the [Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0)](https://creativecommons.org/licenses/by-nc/4.0/), allowing non-commercial use with attribution.
 
-Users are free to remix, adapt, and build upon this work non-commercially, as long as they credit Kunigitaj and license their new creations under identical terms.
+Users are free to remix, adapt, and build upon this work non-commercially, provided they credit Kunigitaj and license their new creations under identical terms.
 
 ---

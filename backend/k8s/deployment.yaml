@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: visionboard-backend
+  labels:
+    app: visionboard-backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: visionboard-backend
+  template:
+    metadata:
+      labels:
+        app: visionboard-backend
+    spec:
+      containers:
+        - name: backend
+          image: gcr.io/your-gcp-project-id/visionboard-backend:latest
+          ports:
+            - containerPort: 8080

@@ -1,0 +1,33 @@
+name: Build and Deploy to GKE
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Cloud SDK
+      uses: google-github-actions/setup-gcloud@v1
+      with:
+        project_id: your-gcp-project-id
+        service_account_key: ${{ secrets.GCP_SA_KEY }}
+        export_default_credentials: true
+
+    - name: Build Docker image
+      run: |
+        docker build -t gcr.io/your-gcp-project-id/visionboard:latest .
+
+    - name: Push Docker image
+      run: |
+        docker push gcr.io/your-gcp-project-id/visionboard:latest
+
+    - name: Deploy to GKE
+      run: |
+        kubectl apply -f backend/k8s/

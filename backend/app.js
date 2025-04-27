@@ -11,7 +11,7 @@ const port = process.env.PORT || 8080;
 app.use(express.json());
 app.use(cors({
   origin: 'http://localhost:3000',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
 }));
 
 // Simple Goal Service
@@ -83,6 +83,14 @@ app.post('/goals', validateGoalInput, (req, res) => {
 
 // Update a goal's status
 app.put('/goals/:id', (req, res) => {
+  const { id } = req.params;
+  const { status } = req.body;
+  const updatedGoal = goalService.updateGoal(id, status);
+  res.json(updatedGoal);
+});
+
+// Partially update a goal's status (PATCH)
+app.patch('/goals/:id', (req, res) => {
   const { id } = req.params;
   const { status } = req.body;
   const updatedGoal = goalService.updateGoal(id, status);

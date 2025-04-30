@@ -24,7 +24,7 @@ It is part of the full VisionBoard system — a real-world example of modern clo
 
 ## Project Demo
 
-🚀 Coming Soon — Screenshots and walkthroughs!
+Coming Soon — Screenshots and walkthroughs!
 
 ---
 
